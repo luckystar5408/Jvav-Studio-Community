@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="rd-core" type="repository">
+    <properties include-transitive-deps="false" maven-id="com.jetbrains.rd:rd-core:0.211.214" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/jetbrains/rd/rd-core/0.211.214/rd-core-0.211.214.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/jetbrains/rd/rd-core/0.211.214/rd-core-0.211.214-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/jetbrains/rd/rd-core/0.211.214/rd-core-0.211.214-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
