@@ -1,67 +1,67 @@
-# IntelliJ IDEA Community Edition [![official JetBrains project](http://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-These instructions will help you build IntelliJ IDEA Community Edition from source code, which is the basis for IntelliJ Platform development.
-The following conventions will be used to refer to directories on your machine:
-* `<USER_HOME>` is your home directory.
-* `<IDEA_HOME>` is the root directory for the IntelliJ source code.
+＃IntelliJ IDEA社区版[！[官方JetBrains项目]（http://jb.gg/badges/official.svg）]（https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub）
+这些说明将帮助您从源代码构建IntelliJ IDEA社区版，这是IntelliJ Platform开发的基础。
+以下约定将用于引用计算机上的目录：
+*`<USER_HOME>`是您的主目录。
+*`<IDEA_HOME>`是IntelliJ源代码的根目录。
 
-## Getting IntelliJ IDEA Community Edition Source Code
-IntelliJ IDEA Community Edition source code is available from `github.com/JetBrains/intellij-community` by either cloning or
-downloading a zip file (based on a branch) into `<IDEA_HOME>`. The default is the *master* branch. 
+##获取IntelliJ IDEA社区版源代码
+可以从github.com/JetBrains/intellij-community中获取IntelliJ IDEA社区版源代码，方法是克隆或
+将一个zip文件（基于分支）下载到`<IDEA_HOME>`中。默认为* master *分支。
 
-The master branch contains the source code which will be used to create the next major version of IntelliJ IDEA. The branch names
-and build numbers for older releases of IntelliJ IDEA can be found on the page of
-[Build Number Ranges](https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html).
+master分支包含源代码，这些源代码将用于创建IntelliJ IDEA的下一个主要版本。分支名称
+以及IntelliJ IDEA的较早版本的内部版本号可以在以下页面找到：
+[内部版本号范围]（https://plugins.jetbrains.com/docs/intellij/build-number-ranges.html）。
 
-_**Speed Tip:**_ If the complete repository history isn't needed then using a shallow clone (`git clone --depth 1`) will save significant time.
+_ **速度提示：** _如果不需要完整的存储库历史记录，则使用浅表克隆（`git clone --depth 1`）将节省大量时间。
 
-These Git operations can also be done through the [IntelliJ IDEA user interface](https://www.jetbrains.com/help/idea/using-git-integration.html).
+这些Git操作也可以通过[IntelliJ IDEA用户界面]（https://www.jetbrains.com/help/idea/using-git-integration.html）完成。
 
-IntelliJ IDEA Community Edition requires additional Android modules from separate Git repositories. To clone these repositories,
-run one of the `getPlugins` scripts located in the `<IDEA_HOME>` directory. These scripts clone their respective *master* branches.
-* `getPlugins.sh` for Linux or macOS.
-* `getPlugins.bat` for Windows.
+IntelliJ IDEA社区版需要来自单独的Git存储库的其他Android模块。要克隆这些存储库，
+运行位于<IDEA_HOME>目录中的getPlugins脚本之一。这些脚本克隆它们各自的* master *分支。
+*`getPlugins.sh`用于Linux或macOS。
+* Windows的`getPlugins.bat`。
 
-_**Note:**_ Always `git checkout` the `intellij-community` and `android` Git repositories to the same branches/tags. 
+_ **注意：** _始终将git init和initellij-community和android Git存储库都复制到相同的分支/标签。
 
-## Building IntelliJ Community Edition
-Version 2020.1 or newer of IntelliJ IDEA Community Edition or IntelliJ IDEA Ultimate Edition is required to build and develop
-for the IntelliJ Platform.
+##构建IntelliJ社区版
+要构建和开发，需要版本2020.1或更高版本的IntelliJ IDEA社区版或IntelliJ IDEA Ultimate Edition。
+用于IntelliJ平台。
 
-### Opening the IntelliJ Source Code for Build
-Using IntelliJ IDEA **File | Open**, select the `<IDEA_HOME>` directory. 
-* If IntelliJ IDEA displays an error about a missing or out of date required plugin (e.g. Kotlin),
-  [enable, upgrade, or install that plugin](https://www.jetbrains.com/help/idea/managing-plugins.html) and restart IntelliJ IDEA.
-* If IntelliJ IDEA displays an error about a Gradle configuration not found,
-  [refresh the Gradle projects](https://www.jetbrains.com/help/idea/jetgradle-tool-window.html). 
+###打开IntelliJ源代码进行构建
+使用IntelliJ IDEA **文件|打开**，选择“ <IDEA_HOME>”目录。
+*如果IntelliJ IDEA显示有关缺少或过期的所需插件（例如Kotlin）的错误，
+  [启用，升级或安装该插件]（https://www.jetbrains.com/help/idea/managing-plugins.html）并重新启动IntelliJ IDEA。
+*如果IntelliJ IDEA显示有关未找到Gradle配置的错误，
+  [刷新Gradle项目]（https://www.jetbrains.com/help/idea/jetgradle-tool-window.html）。
 
-### IntelliJ Build Configuration
-1. Configure a JDK named "**corretto-11**", pointing to installation of JDK 11. It's recommended to use Amazon Corretto JDK, but other 
-   distributions based on OpenJDK should work as well. You may [download it directly](https://www.jetbrains.com/help/idea/sdk.html#jdk-from-ide) 
-   from Project Structure dialog.    
-2. If the _Maven Integration_ plugin is disabled, [add the path variable](https://www.jetbrains.com/help/idea/absolute-path-variables.html)
-   "**MAVEN_REPOSITORY**" pointing to `<USER_HOME>/.m2/repository` directory.
-3. _**Speed Tip:**_ If you have enough RAM on your computer,
-   [configure the compiler settings](https://www.jetbrains.com/help/idea/specifying-compilation-settings.html)
-   to enable the "Compile independent modules in parallel" option. Also, increase build process heap size:
-   * if you use IntelliJ IDEA 2020.3 or newer, set "User-local build process heap size" to 2048. 
-   * if you use IntelliJ IDEA 2020.2 or older, copy value from "Shared build process VM options" to "User-local build process VM options" and add `-Xmx2G` to it.
+### IntelliJ构建配置
+1.配置一个名为“ ** corretto-11 **”的JDK，指向JDK 11的安装。建议使用Amazon Corretto JDK，而其他
+   基于OpenJDK的发行版也应该工作。您可以[直接下载]（https://www.jetbrains.com/help/idea/sdk.html#jdk-from-ide）
+   从项目结构对话框。
+2.如果禁用了_Maven Integration_插件，请[添加路径变量]（https://www.jetbrains.com/help/idea/absolute-path-variables.html）
+   指向“ <USER_HOME> /。m2 / repository”目录的“ ** MAVEN_REPOSITORY **”。
+3. _ **速度提示：** _如果您的计算机上有足够的RAM，
+   [配置编译器设置]（https://www.jetbrains.com/help/idea/specification-compilation-settings.html）
+   启用“并行编译独立模块”选项。另外，增加构建过程堆大小：
+   *如果您使用IntelliJ IDEA 2020.3或更高版本，请将“用户本地生成过程堆大小”设置为2048。
+   *如果您使用的是IntelliJ IDEA 2020.2或更旧的版本，请将值从“共享的构建过程VM选项”复制到“用户本地构建过程VM选项”，然后在其中添加-Xmx2G。
     
-    These changes will greatly reduce compilation time.
+    这些更改将大大减少编译时间。
 
-### Building the IntelliJ Application Source Code
-To build IntelliJ IDEA Community Edition from source, choose **Build | Build Project** from the main menu.
+###构建IntelliJ应用程序源代码
+要从源代码构建IntelliJ IDEA社区版，请选择** Build |从主菜单构建项目**。
 
-To build installation packages, run the `ant` command in `<IDEA_HOME>` directory. See the `build.xml` file for details.
+要构建安装软件包，请在<IDEA_HOME>目录中运行`ant`命令。有关详细信息，请参见`build.xml`文件。
 
-## Running IntelliJ IDEA
-To run the IntelliJ IDEA built from source, choose **Run | Run** from the main menu. This will use the preconfigured run configuration "**IDEA**".
+##运行IntelliJ IDEA
+要运行从源代码构建的IntelliJ IDEA，请选择**运行|。从主菜单运行**。这将使用预配置的运行配置“ ** IDEA **”。
 
-To run tests on the build, apply these setting to the **Run | Edit Configurations... | Templates | JUnit** configuration tab:
-  * Working dir: `<IDEA_HOME>/bin`
-  * VM options: 
-    * `-ea` 
-    * `-Didea.config.path=../test-config`
-    * `-Didea.system.path=../test-system`
+要在构建上运行测试，请将这些设置应用于** Run |。编辑配置... |模板| JUnit **配置选项卡：
+  *工作目录：`<IDEA_HOME> / bin`
+  * VM选项：
+    *`-ea`
+    *`-Didea.config.path = .. / test-config`
+    *`-Didea.system.path = .. / test-system`
  
-You can find other helpful information at [https://www.jetbrains.com/opensource/idea](https://www.jetbrains.com/opensource/idea).
-The "Contribute Code" section of that site describes how you can contribute to IntelliJ IDEA.
+您可以在[https://www.jetbrains.com/opensource/idea](https://www.jetbrains.com/opensource/idea）上找到其他有用的信息。
+该站点的“贡献代码”部分描述了如何为IntelliJ IDEA做出贡献。
